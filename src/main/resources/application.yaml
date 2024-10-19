@@ -3,9 +3,14 @@ spring:
     name: quantum-restaurant-api
   datasource:
     url: jdbc:postgresql://localhost:5432/restaurant_db
-    username: your_db_username
-    password: your_db_password
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:123}
     driver-class-name: org.postgresql.Driver
+  security:
+    user:
+      name: ${ADMIN_USER:admin}
+      password: ${ADMIN_PASSWORD:123}
+
 
   jpa:
     hibernate:
@@ -18,3 +23,6 @@ spring:
     enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
+
+server:
+  port: 8090
