@@ -1,0 +1,13 @@
+CREATE TABLE inventory_item (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(100) NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    quantity DOUBLE PRECISION NOT NULL DEFAULT 0,
+    unit VARCHAR(20) NOT NULL,
+    reorder_level DOUBLE PRECISION NOT NULL DEFAULT 0,
+    price_per_unit DOUBLE PRECISION NOT NULL DEFAULT 0,
+    created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    restaurant_id UUID NOT NULL,
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id) ON DELETE CASCADE
+);
