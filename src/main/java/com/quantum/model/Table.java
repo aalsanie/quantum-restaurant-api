@@ -84,5 +84,7 @@ public class Table {
         AVAILABLE, OCCUPIED
     }
 
-
+    public void setId(UUID id) {
+        this.id = id;
+    }
 }
