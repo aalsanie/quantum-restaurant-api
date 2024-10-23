@@ -55,6 +55,9 @@ public class MenuService {
 
     @Transactional
     public void deleteMenu(UUID menuId) {
+        if (!menuRepository.existsById(menuId)) {
+            throw new EntityNotFoundException("Menu not found with ID: " + menuId);
+        }
         menuRepository.deleteById(menuId);
     }
 }
