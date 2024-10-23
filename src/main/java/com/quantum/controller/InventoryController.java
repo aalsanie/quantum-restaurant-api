@@ -83,4 +83,13 @@ public class InventoryController {
         List<StockTransaction> transactions = stockTransactionService.getTransactionsByItem(itemId);
         return ResponseEntity.ok(transactions);
     }
+
+    @PostMapping("/{itemId}/adjust")
+    public ResponseEntity<InventoryItem> adjustStock(
+            @PathVariable UUID itemId,
+            @RequestParam double newQuantity,
+            @RequestParam(required = false) String note) {
+        InventoryItem adjustedItem = stockTransactionService.adjustStock(itemId, newQuantity, note);
+        return ResponseEntity.ok(adjustedItem);
+    }
 }
