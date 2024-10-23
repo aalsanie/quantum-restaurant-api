@@ -32,7 +32,7 @@ public class PaymentService {
 
         // Check if the amount is valid for partial payment
         double remainingAmount = order.getRemainingAmount();
-        if (amount <= 0 || amount > remainingAmount) {
+        if (amount < 0 || amount > remainingAmount) {
             throw new IllegalArgumentException("Payment amount must be positive and not exceed the remaining balance.");
         }
 
