@@ -1,31 +1,28 @@
 package com.quantum.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+
 @Entity
-@jakarta.persistence.Table(name = "orders")
 public class Order {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @ManyToOne
-    @JoinColumn(name = "table_id")
     private Table table;
 
     @ManyToOne
-    @JoinColumn(name = "waiter_id")
     private Employee waiter;
 
     private double totalAmount;
-    private double paidAmount; // The sum of all payments made so far
+    private double paidAmount;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -33,9 +30,15 @@ public class Order {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
+
     public enum Status {
-        PENDING, IN_PROGRESS, COMPLETED, CANCELED
+        PENDING,
+        COMPLETED,
+        CANCELED
     }
+
 
     public Restaurant getRestaurant() {
         return restaurant;
@@ -43,6 +46,14 @@ public class Order {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public Table getTable() {
@@ -101,15 +112,20 @@ public class Order {
         this.updatedAt = updatedAt;
     }
 
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    /**
+     * Calculate the remaining amount to be paid for the order.
+     *
+     * @return The remaining amount.
+     */
     public double getRemainingAmount() {
         return totalAmount - paidAmount;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 }

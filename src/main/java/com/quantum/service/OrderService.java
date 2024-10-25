@@ -1,9 +1,6 @@
 package com.quantum.service;
 
-import com.quantum.model.Employee;
-import com.quantum.model.Order;
-import com.quantum.model.Restaurant;
-import com.quantum.model.Table;
+import com.quantum.model.*;
 import com.quantum.repository.EmployeeRepository;
 import com.quantum.repository.OrderRepository;
 import com.quantum.repository.RestaurantRepository;
@@ -25,15 +22,19 @@ public class OrderService {
     private final TableRepository tableRepository;
     private final EmployeeRepository employeeRepository;
 
+    private final StockTransactionService stockTransactionService;
+
     @Autowired
     public OrderService(OrderRepository orderRepository,
                         RestaurantRepository restaurantRepository,
                         TableRepository tableRepository,
-                        EmployeeRepository employeeRepository) {
+                        EmployeeRepository employeeRepository,
+                        StockTransactionService stockTransactionService) {
         this.orderRepository = orderRepository;
         this.restaurantRepository = restaurantRepository;
         this.tableRepository = tableRepository;
         this.employeeRepository = employeeRepository;
+        this.stockTransactionService = stockTransactionService;
     }
 
     @Transactional
@@ -48,12 +49,35 @@ public class OrderService {
         order.setRestaurant(restaurant);
         order.setTable(table);
         order.setWaiter(waiter);
-        order.setTotalAmount(0.0); // Initial amount is zero, to be updated as items are added
+        order.setTotalAmount(0.0);
         order.setPaidAmount(0.0);
         order.setStatus(Order.Status.PENDING);
         order.setCreatedAt(LocalDateTime.now());
         order.setUpdatedAt(LocalDateTime.now());
-        return orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
+
+        // Adjust inventory based on ordered items
+        for (OrderItem orderItem : order.getOrderItems()) {
+            adjustInventoryForOrderItem(orderItem);
+        }
+
+        return savedOrder;
+    }
+
+    private void adjustInventoryForOrderItem(OrderItem orderItem) {
+        MenuItem menuItem = orderItem.getMenuItem();
+        int orderedQuantity = orderItem.getQuantity();
+
+        for (Ingredient ingredient : menuItem.getIngredients()) {
+            UUID inventoryItemId = ingredient.getInventoryItem().getId();
+            double quantityUsed = ingredient.getQuantity() * orderedQuantity;
+
+            stockTransactionService.useStock(
+                    inventoryItemId,
+                    quantityUsed,
+                    "Used for order ID: " + orderItem.getOrder().getId() + ", MenuItem: " + menuItem.getName()
+            );
+        }
     }
 
     public List<Order> getOrdersByRestaurant(UUID restaurantId) {

@@ -19,7 +19,6 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -63,14 +62,14 @@ public class InventoryItemServiceTest {
 
     @Test
     void createInventoryItem_ShouldReturnSavedItem_WhenRestaurantExists() {
-        // Arrange
+        
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurant));
         when(inventoryItemRepository.save(any(InventoryItem.class))).thenReturn(inventoryItem);
 
-        // Act
+        
         InventoryItem savedItem = inventoryItemService.createInventoryItem(restaurantId, inventoryItem);
 
-        // Assert
+        
         assertNotNull(savedItem);
         assertEquals("Test Item", savedItem.getName());
         assertEquals(restaurant, savedItem.getRestaurant());
@@ -80,10 +79,10 @@ public class InventoryItemServiceTest {
 
     @Test
     void createInventoryItem_ShouldThrowException_WhenRestaurantNotFound() {
-        // Arrange
+        
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.empty());
 
-        // Act & Assert
+        
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () ->
                 inventoryItemService.createInventoryItem(restaurantId, inventoryItem));
         assertEquals("Restaurant not found with ID: " + restaurantId, exception.getMessage());
@@ -93,14 +92,14 @@ public class InventoryItemServiceTest {
 
     @Test
     void getInventoryItemsByRestaurant_ShouldReturnItems() {
-        // Arrange
+        
         List<InventoryItem> items = List.of(inventoryItem);
         when(inventoryItemRepository.findByRestaurantId(restaurantId)).thenReturn(items);
 
-        // Act
+        
         List<InventoryItem> retrievedItems = inventoryItemService.getInventoryItemsByRestaurant(restaurantId);
 
-        // Assert
+        
         assertNotNull(retrievedItems);
         assertEquals(1, retrievedItems.size());
         assertEquals(inventoryItem, retrievedItems.get(0));
@@ -109,13 +108,13 @@ public class InventoryItemServiceTest {
 
     @Test
     void getInventoryItemById_ShouldReturnItem_WhenItemExists() {
-        // Arrange
+        
         when(inventoryItemRepository.findById(itemId)).thenReturn(Optional.of(inventoryItem));
 
-        // Act
+        
         InventoryItem retrievedItem = inventoryItemService.getInventoryItemById(itemId);
 
-        // Assert
+        
         assertNotNull(retrievedItem);
         assertEquals("Test Item", retrievedItem.getName());
         verify(inventoryItemRepository, times(1)).findById(itemId);
@@ -123,10 +122,10 @@ public class InventoryItemServiceTest {
 
     @Test
     void getInventoryItemById_ShouldThrowException_WhenItemNotFound() {
-        // Arrange
+        
         when(inventoryItemRepository.findById(itemId)).thenReturn(Optional.empty());
 
-        // Act & Assert
+        
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () ->
                 inventoryItemService.getInventoryItemById(itemId));
         assertEquals("Inventory item not found with ID: " + itemId, exception.getMessage());
@@ -135,7 +134,7 @@ public class InventoryItemServiceTest {
 
     @Test
     void updateInventoryItem_ShouldUpdateItem_WhenItemExists() {
-        // Arrange
+        
         InventoryItem updatedItem = new InventoryItem();
         updatedItem.setName("Updated Item");
         updatedItem.setCategory("Beverage");
@@ -147,10 +146,10 @@ public class InventoryItemServiceTest {
         when(inventoryItemRepository.findById(itemId)).thenReturn(Optional.of(inventoryItem));
         when(inventoryItemRepository.save(any(InventoryItem.class))).thenReturn(updatedItem);
 
-        // Act
+        
         InventoryItem result = inventoryItemService.updateInventoryItem(itemId, updatedItem);
 
-        // Assert
+        
         assertNotNull(result);
         assertEquals("Updated Item", result.getName());
         assertEquals("Beverage", result.getCategory());
@@ -161,10 +160,10 @@ public class InventoryItemServiceTest {
 
     @Test
     void updateInventoryItem_ShouldThrowException_WhenItemNotFound() {
-        // Arrange
+        
         when(inventoryItemRepository.findById(itemId)).thenReturn(Optional.empty());
 
-        // Act & Assert
+        
         InventoryItem updatedItem = new InventoryItem();
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () ->
                 inventoryItemService.updateInventoryItem(itemId, updatedItem));
@@ -174,13 +173,13 @@ public class InventoryItemServiceTest {
 
     @Test
     void deleteInventoryItem_ShouldDeleteItem_WhenItemExists() {
-        // Arrange
+        
         doNothing().when(inventoryItemRepository).deleteById(itemId);
 
-        // Act
+        
         inventoryItemService.deleteInventoryItem(itemId);
 
-        // Assert
+        
         verify(inventoryItemRepository, times(1)).deleteById(itemId);
     }
 }
