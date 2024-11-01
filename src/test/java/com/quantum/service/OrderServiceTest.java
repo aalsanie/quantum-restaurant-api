@@ -43,7 +43,7 @@ class OrderServiceTest {
     private OrderService orderService;
 
     private UUID restaurantId;
-    private UUID tableId;
+    private int tableId;
     private UUID waiterId;
     private UUID orderId;
     private Restaurant restaurant;
@@ -55,7 +55,7 @@ class OrderServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         restaurantId = UUID.randomUUID();
-        tableId = UUID.randomUUID();
+        tableId = 1;
         waiterId = UUID.randomUUID();
         orderId = UUID.randomUUID();
 

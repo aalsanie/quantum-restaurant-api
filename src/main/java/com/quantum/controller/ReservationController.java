@@ -23,7 +23,7 @@ public class ReservationController {
     @PostMapping("/restaurants/{restaurantId}/tables/{tableId}")
     public ResponseEntity<Reservation> createReservation(
             @PathVariable UUID restaurantId,
-            @PathVariable UUID tableId,
+            @PathVariable int tableId,
             @RequestBody Reservation reservation) {
         return ResponseEntity.ok(reservationService.createReservation(restaurantId, tableId, reservation));
     }

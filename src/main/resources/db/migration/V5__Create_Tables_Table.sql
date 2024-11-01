@@ -1,10 +1,9 @@
 CREATE TABLE tables (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    layout_id UUID NOT NULL,
-    table_number INTEGER NOT NULL,
-    capacity INTEGER NOT NULL DEFAULT 4,
-    status VARCHAR(50) NOT NULL DEFAULT 'AVAILABLE', -- Enum-like: AVAILABLE, OCCUPIED
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (layout_id) REFERENCES restaurant_layouts(id) ON DELETE CASCADE
+    id INT PRIMARY KEY,
+    layout_id UUID REFERENCES restaurant_layouts(id),
+    table_number INT NOT NULL,
+    capacity INT NOT NULL,
+    status VARCHAR(20),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );

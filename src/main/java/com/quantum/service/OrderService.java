@@ -38,7 +38,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Order createOrder(UUID restaurantId, UUID tableId, UUID waiterId, Order order) {
+    public Order createOrder(UUID restaurantId, int tableId, UUID waiterId, Order order) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new EntityNotFoundException("Restaurant not found with ID: " + restaurantId));
         Table table = tableRepository.findById(tableId)

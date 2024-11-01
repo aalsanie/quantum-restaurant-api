@@ -2,6 +2,7 @@ package com.quantum.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class PurchaseOrder {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
-    private List<PurchaseOrderItem> items;
+    private List<PurchaseOrderItem> items = new ArrayList<>();//avoid NPE
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id", nullable = false)

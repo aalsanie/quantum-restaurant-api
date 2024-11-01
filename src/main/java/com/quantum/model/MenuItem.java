@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public class MenuItem {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "menuItem", cascade = CascadeType.ALL)
-    private List<Ingredient> ingredients;
+    private List<Ingredient> ingredients = new ArrayList<>();//avoid NPE
 
     public Menu getMenu() {
         return menu;

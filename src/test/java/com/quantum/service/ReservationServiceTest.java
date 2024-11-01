@@ -37,7 +37,7 @@ class ReservationServiceTest {
     private ReservationService reservationService;
 
     private UUID restaurantId;
-    private UUID tableId;
+    private int tableId;
     private UUID reservationId;
     private Restaurant restaurant;
     private Table table;
@@ -47,7 +47,7 @@ class ReservationServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         restaurantId = UUID.randomUUID();
-        tableId = UUID.randomUUID();
+        tableId = 1;
         reservationId = UUID.randomUUID();
 
         restaurant = new Restaurant();

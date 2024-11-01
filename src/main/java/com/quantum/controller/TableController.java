@@ -31,17 +31,17 @@ public class TableController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Table> getTableById(@PathVariable UUID id) {
+    public ResponseEntity<Table> getTableById(@PathVariable int id) {
         return ResponseEntity.ok(tableService.getTableById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Table> updateTable(@PathVariable UUID id, @RequestBody Table updatedTable) {
+    public ResponseEntity<Table> updateTable(@PathVariable int id, @RequestBody Table updatedTable) {
         return ResponseEntity.ok(tableService.updateTable(id, updatedTable));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTable(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteTable(@PathVariable int id) {
         tableService.deleteTable(id);
         return ResponseEntity.noContent().build();
     }

@@ -39,13 +39,13 @@ public class TableService {
         return tableRepository.findByLayoutId(layoutId);
     }
 
-    public Table getTableById(UUID tableId) {
+    public Table getTableById(int tableId) {
         return tableRepository.findById(tableId)
                 .orElseThrow(() -> new EntityNotFoundException("Table not found with ID: " + tableId));
     }
 
     @Transactional
-    public Table updateTable(UUID tableId, Table updatedTable) {
+    public Table updateTable(int tableId, Table updatedTable) {
         Table existingTable = getTableById(tableId);
         existingTable.setTableNumber(updatedTable.getTableNumber());
         existingTable.setCapacity(updatedTable.getCapacity());
@@ -55,7 +55,7 @@ public class TableService {
     }
 
     @Transactional
-    public void deleteTable(UUID tableId) {
+    public void deleteTable(int tableId) {
         tableRepository.deleteById(tableId);
     }
 }
