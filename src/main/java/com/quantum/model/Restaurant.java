@@ -27,6 +27,9 @@ public class Restaurant {
 
     private LocalDateTime updatedAt;
 
+    @OneToOne(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private Location location;
+
     public enum Status {
         PENDING, APPROVED, REJECTED
     }
@@ -85,6 +88,14 @@ public class Restaurant {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
 
