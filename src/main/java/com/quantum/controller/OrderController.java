@@ -23,7 +23,7 @@ public class OrderController {
     @PostMapping("/restaurants/{restaurantId}/tables/{tableId}/waiters/{waiterId}")
     public ResponseEntity<Order> createOrder(
             @PathVariable UUID restaurantId,
-            @PathVariable UUID tableId,
+            @PathVariable int tableId,
             @PathVariable UUID waiterId,
             @RequestBody Order order) {
         return ResponseEntity.ok(orderService.createOrder(restaurantId, tableId, waiterId, order));

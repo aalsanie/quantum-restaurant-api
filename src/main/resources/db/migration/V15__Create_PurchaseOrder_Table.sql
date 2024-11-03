@@ -1,0 +1,10 @@
+CREATE TABLE purchase_order (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    supplier VARCHAR(255) NOT NULL,
+    total_amount DOUBLE PRECISION NOT NULL DEFAULT 0,
+    status VARCHAR(20) NOT NULL, -- PENDING, RECEIVED, CANCELLED
+    created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    restaurant_id UUID NOT NULL,
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id) ON DELETE CASCADE
+);

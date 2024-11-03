@@ -32,7 +32,7 @@ public class ReservationService {
     }
 
     @Transactional
-    public Reservation createReservation(UUID restaurantId, UUID tableId, Reservation reservation) {
+    public Reservation createReservation(UUID restaurantId, int tableId, Reservation reservation) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new EntityNotFoundException("Restaurant not found with ID: " + restaurantId));
         Table table = tableRepository.findById(tableId)

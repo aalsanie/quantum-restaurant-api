@@ -10,8 +10,7 @@ import java.util.UUID;
 public class Table {
 
     @Id
-    @GeneratedValue
-    private UUID id;
+    private int id; // Front end will set this ID and send it to the backend
 
     @ManyToOne
     @JoinColumn(name = "layout_id")
@@ -28,7 +27,7 @@ public class Table {
 
     private LocalDateTime updatedAt;
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
@@ -84,7 +83,7 @@ public class Table {
         AVAILABLE, OCCUPIED
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

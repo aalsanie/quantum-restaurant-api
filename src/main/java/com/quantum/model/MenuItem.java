@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +27,9 @@ public class MenuItem {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "menuItem", cascade = CascadeType.ALL)
+    private List<Ingredient> ingredients = new ArrayList<>();//avoid NPE
 
     public Menu getMenu() {
         return menu;
@@ -88,5 +93,13 @@ public class MenuItem {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }

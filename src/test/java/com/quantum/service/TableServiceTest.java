@@ -31,7 +31,7 @@ class TableServiceTest {
     private TableService tableService;
 
     private UUID layoutId;
-    private UUID tableId;
+    private int tableId;
     private RestaurantLayout layout;
     private Table table;
 
@@ -39,7 +39,7 @@ class TableServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         layoutId = UUID.randomUUID();
-        tableId = UUID.randomUUID();
+        tableId = 1;
 
         layout = new RestaurantLayout();
         layout.setId(layoutId);

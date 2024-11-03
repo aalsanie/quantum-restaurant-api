@@ -1,0 +1,20 @@
+{
+  "supplier": "ABC Suppliers",
+  "totalAmount": 500.00,
+  "items": [
+    {
+      "inventoryItem": {
+        "id": "e7b5dd3f-53e8-4e55-bc97-2cbb5d33a417"
+      },
+      "quantity": 10,
+      "pricePerUnit": 25.00
+    },
+    {
+      "inventoryItem": {
+        "id": "a9b3bbcf-43a8-4db8-bc98-3ee41a914e67"
+      },
+      "quantity": 20,
+      "pricePerUnit": 10.00
+    }
+  ]
+}
