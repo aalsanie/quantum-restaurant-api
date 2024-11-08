@@ -4,6 +4,8 @@ CREATE TABLE tables (
     table_number INT NOT NULL,
     capacity INT NOT NULL,
     status VARCHAR(20),
+    table_type VARCHAR(20), -- New field for distinguishing table types
+    floor_number INT,       -- New field for floor number
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
