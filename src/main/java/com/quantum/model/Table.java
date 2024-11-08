@@ -1,34 +1,48 @@
 package com.quantum.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @jakarta.persistence.Table(name = "tables")
 public class Table {
 
     @Id
-    private int id; // Front end will set this ID and send it to the backend
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "layout_id")
     private RestaurantLayout layout;
 
     private int tableNumber;
-
     private int capacity;
 
     @Enumerated(EnumType.STRING)
     private Status status; // Enum: AVAILABLE, OCCUPIED
 
-    private LocalDateTime createdAt;
+    @Enumerated(EnumType.STRING)
+    private TableType tableType; // Enum: ROUND_BAR, REGULAR
 
+    private int floorNumber;
+
+    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    public enum Status {
+        AVAILABLE, OCCUPIED
+    }
+
+    public enum TableType {
+        ROUND_BAR, REGULAR
+    }
+
+    // Getters and setters
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public RestaurantLayout getLayout() {
@@ -63,6 +77,22 @@ public class Table {
         this.status = status;
     }
 
+    public TableType getTableType() {
+        return tableType;
+    }
+
+    public void setTableType(TableType tableType) {
+        this.tableType = tableType;
+    }
+
+    public int getFloorNumber() {
+        return floorNumber;
+    }
+
+    public void setFloorNumber(int floorNumber) {
+        this.floorNumber = floorNumber;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -77,13 +107,5 @@ public class Table {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public enum Status {
-        AVAILABLE, OCCUPIED
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }
