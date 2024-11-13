@@ -11,19 +11,17 @@ public class Table {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "layout_id")
-    private RestaurantLayout layout;
+    @JoinColumn(name = "floor_id", nullable = false)
+    private Floor floor;
 
     private int tableNumber;
     private int capacity;
 
     @Enumerated(EnumType.STRING)
-    private Status status; // Enum: AVAILABLE, OCCUPIED
+    private Status status;
 
     @Enumerated(EnumType.STRING)
-    private TableType tableType; // Enum: ROUND_BAR, REGULAR
-
-    private int floorNumber;
+    private TableType tableType;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -45,12 +43,12 @@ public class Table {
         this.id = id;
     }
 
-    public RestaurantLayout getLayout() {
-        return layout;
+    public Floor getFloor() {
+        return floor;
     }
 
-    public void setLayout(RestaurantLayout layout) {
-        this.layout = layout;
+    public void setFloor(Floor floor) {
+        this.floor = floor;
     }
 
     public int getTableNumber() {
@@ -83,14 +81,6 @@ public class Table {
 
     public void setTableType(TableType tableType) {
         this.tableType = tableType;
-    }
-
-    public int getFloorNumber() {
-        return floorNumber;
-    }
-
-    public void setFloorNumber(int floorNumber) {
-        this.floorNumber = floorNumber;
     }
 
     public LocalDateTime getCreatedAt() {

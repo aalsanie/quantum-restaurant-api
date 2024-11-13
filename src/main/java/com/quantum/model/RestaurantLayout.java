@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,14 +16,23 @@ public class RestaurantLayout {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
+    @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
-    private int numFloors;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "layout", cascade = CascadeType.ALL)
+    private List<Floor> floors;
+
+    // Getters and setters
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public Restaurant getRestaurant() {
         return restaurant;
@@ -30,14 +40,6 @@ public class RestaurantLayout {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
-    }
-
-    public int getNumFloors() {
-        return numFloors;
-    }
-
-    public void setNumFloors(int numFloors) {
-        this.numFloors = numFloors;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -56,12 +58,11 @@ public class RestaurantLayout {
         this.updatedAt = updatedAt;
     }
 
-    public UUID getId() {
-        return id;
+    public List<Floor> getFloors() {
+        return floors;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setFloors(List<Floor> floors) {
+        this.floors = floors;
     }
 }
-

@@ -1,7 +1,8 @@
 package com.quantum.service;
-import com.quantum.model.RestaurantLayout;
+
+import com.quantum.model.Floor;
 import com.quantum.model.Table;
-import com.quantum.repository.RestaurantLayoutRepository;
+import com.quantum.repository.FloorRepository;
 import com.quantum.repository.TableRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +17,27 @@ import java.util.UUID;
 public class TableService {
 
     private final TableRepository tableRepository;
-    private final RestaurantLayoutRepository restaurantLayoutRepository;
+    private final FloorRepository floorRepository;
 
     @Autowired
     public TableService(TableRepository tableRepository,
-                        RestaurantLayoutRepository restaurantLayoutRepository) {
+                        FloorRepository floorRepository) {
         this.tableRepository = tableRepository;
-        this.restaurantLayoutRepository = restaurantLayoutRepository;
+        this.floorRepository = floorRepository;
     }
 
     @Transactional
-    public com.quantum.model.Table createTable(UUID layoutId, com.quantum.model.Table table) {
-        RestaurantLayout layout = restaurantLayoutRepository.findById(layoutId)
-                .orElseThrow(() -> new EntityNotFoundException("Layout not found with ID: " + layoutId));
-        table.setLayout(layout);
+    public Table createTable(UUID floorId, Table table) {
+        Floor floor = floorRepository.findById(floorId)
+                .orElseThrow(() -> new EntityNotFoundException("Floor not found with ID: " + floorId));
+        table.setFloor(floor);
         table.setCreatedAt(LocalDateTime.now());
         table.setUpdatedAt(LocalDateTime.now());
         return tableRepository.save(table);
     }
 
-    public List<Table> getTablesByLayout(UUID layoutId) {
-        return tableRepository.findByLayoutId(layoutId);
+    public List<Table> getTablesByFloor(UUID floorId) {
+        return tableRepository.findByFloorId(floorId);
     }
 
     public Table getTableById(int tableId) {
@@ -50,6 +51,7 @@ public class TableService {
         existingTable.setTableNumber(updatedTable.getTableNumber());
         existingTable.setCapacity(updatedTable.getCapacity());
         existingTable.setStatus(updatedTable.getStatus());
+        existingTable.setTableType(updatedTable.getTableType());
         existingTable.setUpdatedAt(LocalDateTime.now());
         return tableRepository.save(existingTable);
     }
