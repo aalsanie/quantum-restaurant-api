@@ -31,6 +31,17 @@ public class MenuItem {
     @OneToMany(mappedBy = "menuItem", cascade = CascadeType.ALL)
     private List<Ingredient> ingredients = new ArrayList<>();//avoid NPE
 
+    private String imageUrl;
+
+    // Getters and setters for the imageUrl field
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public Menu getMenu() {
         return menu;
     }

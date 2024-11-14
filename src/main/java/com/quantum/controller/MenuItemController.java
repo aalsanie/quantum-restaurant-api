@@ -5,7 +5,9 @@ import com.quantum.service.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,5 +46,14 @@ public class MenuItemController {
     public ResponseEntity<Void> deleteMenuItem(@PathVariable UUID id) {
         menuItemService.deleteMenuItem(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/upload-image")
+    public ResponseEntity<String> uploadImage(
+            @PathVariable UUID id,
+            @RequestParam("file") MultipartFile file) throws IOException {
+
+        String imageUrl = menuItemService.uploadImage(id, file);
+        return ResponseEntity.ok(imageUrl);
     }
 }
