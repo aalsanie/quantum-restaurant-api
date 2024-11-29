@@ -106,7 +106,7 @@ The **Quantum Restaurant API** is a RESTful API designed for managing restaurant
 | `/api/payments/{paymentId}`                | PUT    | Update payment details                   | `200 OK` (Payment)         | `400 Bad Request`         |
 | `/api/payments/{paymentId}`                | DELETE | Cancel a payment                         | `204 No Content`           | `404 Not Found`           |
 
----
+-------------------------------------------------------------------------------------------
 
 ## Notes on Response Format
 All API responses follow a standard JSON format. Here’s an example for successful and failure responses:
