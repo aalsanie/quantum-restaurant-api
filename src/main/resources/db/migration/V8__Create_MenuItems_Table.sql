@@ -7,5 +7,6 @@ CREATE TABLE menu_items (
     is_available BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    image_url VARCHAR(500),
     FOREIGN KEY (menu_id) REFERENCES menus(id) ON DELETE CASCADE
 );

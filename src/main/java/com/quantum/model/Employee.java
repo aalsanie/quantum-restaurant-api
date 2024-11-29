@@ -15,17 +15,33 @@ public class Employee {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
+    @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
+
+    @ManyToOne
+    @JoinColumn(name = "floor_id", nullable = false)
+    private Floor floor;
 
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private Role role; // Enum: WAITER, MANAGER, CHEF, etc.
+    private Role role;
 
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
+
+    public enum Role {
+        WAITER, MANAGER, CHEF
+    }
+
+    // Getters and setters
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public Restaurant getRestaurant() {
         return restaurant;
@@ -33,6 +49,14 @@ public class Employee {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public Floor getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Floor floor) {
+        this.floor = floor;
     }
 
     public String getName() {
@@ -65,17 +89,5 @@ public class Employee {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public enum Role {
-        WAITER, MANAGER, CHEF
     }
 }

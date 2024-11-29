@@ -27,7 +27,7 @@ public class TableController {
 
     @GetMapping("/layouts/{layoutId}")
     public ResponseEntity<List<Table>> getTablesByLayout(@PathVariable UUID layoutId) {
-        return ResponseEntity.ok(tableService.getTablesByLayout(layoutId));
+        return ResponseEntity.ok(tableService.getTablesByFloor(layoutId));
     }
 
     @GetMapping("/{id}")
