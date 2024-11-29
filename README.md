@@ -117,13 +117,14 @@ All API responses follow a standard JSON format. Here’s an example for success
     "status": "success",
     "data": { ... }
 }
+```
 
 ## License
 
-Copyright 2024 Ahmad Al-Sanie
+*Copyright 2024 Ahmad Al-Sanie*
 
 All rights reserved. Unauthorized copying, distribution, or modification of this software, via any medium, is strictly prohibited without the explicit written consent of the author.
 This software is provided "as is," without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, or non-infringement. 
 In no event shall the author be liable for any claim, damages, or other liability arising from, out of, or in connection with the software or its use.
-
+This project is licensed under a **Proprietary License**. Unauthorized use, modification, or distribution is strictly prohibited. For more details, refer to the [LICENSE](./LICENSE) file.
 
