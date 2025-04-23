@@ -1,4 +1,5 @@
 # Quantum Restaurant API
+A production-grade modular backend system for managing restaurant operations efficiently. This Spring Boot API covers everything from employee management to inventory, menus, and order processing.
 
 ## Introduction
 The **Quantum Restaurant API** is a RESTful API designed for managing restaurant operations efficiently. It includes functionalities for handling employees, inventory, menus, orders, and more, tailored to streamline restaurant workflows.
@@ -56,13 +57,20 @@ The **Quantum Restaurant API** is a RESTful API designed for managing restaurant
     API documentation: http://localhost:8080
 
 ## License
-Copyright [2024] [Ahmad AL-Sanie]
+## 🤝 Contributing
 
-All rights reserved. Unauthorized copying, distribution, or modification of this software, via any medium, is strictly prohibited without the explicit written consent of the author.
+Pull requests are welcome! If you’d like to add features or fix bugs:
 
-This software is provided "as is," without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, or non-infringement. In no event shall the author be liable for any claim, damages, or other liability arising from, out of, or in connection with the software or its use.
+1. Fork the repo
+2. Create a feature branch
+3. Commit your changes
+4. Open a PR with context
 
-This project is licensed under a **Proprietary License**. Unauthorized use, modification, or distribution is strictly prohibited. For more details, refer to the [LICENSE](./LICENSE) file.
+---
+
+## 🪪 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
 ## Available Endpoints
 
